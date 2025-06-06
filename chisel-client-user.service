@@ -1,0 +1,28 @@
+[Unit]
+Description=Chisel Client - Fast TCP/UDP tunnel over HTTP (User Service)
+Documentation=https://github.com/jpillora/chisel
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+ExecStart=%h/.local/share/chisel/chisel-client.sh start
+ExecStop=%h/.local/share/chisel/chisel-client.sh stop
+ExecReload=%h/.local/share/chisel/chisel-client.sh restart
+PIDFile=%h/.local/share/chisel/chisel-client.pid
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=5
+
+# 环境变量
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=CONFIG_FILE=%h/.config/chisel/chisel-client.conf
+
+# 日志设置
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=chisel-client-user
+
+[Install]
+WantedBy=default.target

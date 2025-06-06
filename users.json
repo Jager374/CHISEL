@@ -1,0 +1,65 @@
+{
+  "_comment": "Chisel 用户认证配置文件",
+  "_description": "定义允许连接的用户及其访问权限",
+  "_format": "用户名:密码 -> [地址正则表达式列表]",
+  "_examples": {
+    "normal_remote": "普通远程连接格式: remote-host:remote-port",
+    "reverse_remote": "反向端口转发格式: R:local-interface:local-port"
+  },
+  
+  "admin:admin123": [
+    ".*"
+  ],
+  
+  "client1:password123": [
+    ".*:.*",
+    "R:.*:.*"
+  ],
+  
+  "client2:securepass456": [
+    "localhost:.*",
+    "127\\.0\\.0\\.1:.*",
+    "192\\.168\\..*:.*"
+  ],
+  
+  "readonly:readonly789": [
+    ".*:80",
+    ".*:443",
+    ".*:8080"
+  ],
+  
+  "socks_user:socks123": [
+    "socks"
+  ],
+  
+  "reverse_user:reverse456": [
+    "R:.*:22",
+    "R:.*:3389",
+    "R:.*:5900"
+  ],
+  
+  "limited_user:limited789": [
+    "google\\.com:80",
+    "google\\.com:443",
+    "github\\.com:80",
+    "github\\.com:443"
+  ],
+  
+  "internal_user:internal123": [
+    "10\\..*:.*",
+    "172\\.16\\..*:.*",
+    "172\\.17\\..*:.*",
+    "172\\.18\\..*:.*",
+    "172\\.19\\..*:.*",
+    "172\\.2[0-9]\\..*:.*",
+    "172\\.3[0-1]\\..*:.*",
+    "192\\.168\\..*:.*"
+  ],
+  
+  "test_user:test123": [
+    "httpbin\\.org:80",
+    "httpbin\\.org:443",
+    "example\\.com:80",
+    "example\\.com:443"
+  ]
+}
